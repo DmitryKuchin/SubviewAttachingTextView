@@ -13,7 +13,7 @@ import UIKit
  - Note: Implementing this protocol is encouraged over providing a single view in a `SubviewTextAttachment`, because it allows attributed strings with subview attachments to be rendered in multiple text views at the same time: each text view would get its own subview that corresponds to the attachment.
  */
 @objc(VVTextAttachedViewProvider)
-public protocol TextAttachedViewProvider: class {
+public protocol TextAttachedViewProvider: AnyObject {
 
     /**
      Returns a view that corresponds to the specified attachment.

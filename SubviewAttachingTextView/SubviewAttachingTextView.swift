@@ -24,7 +24,7 @@ open class SubviewAttachingTextView: UITextView {
         self.commonInit()
     }
 
-    private let attachmentBehavior = SubviewAttachingTextViewBehavior()
+    private var attachmentBehavior = SubviewAttachingTextViewBehavior()
 
     private func commonInit() {
         // Connect the attachment behavior
@@ -38,6 +38,18 @@ open class SubviewAttachingTextView: UITextView {
             // Text container insets are used to convert coordinates between the text container and text view, so a change to these insets must trigger a layout update
             self.attachmentBehavior.layoutAttachedSubviews()
         }
+    }
+    
+    func invalidate() {
+        attachmentBehavior = SubviewAttachingTextViewBehavior()
+        attributedText = nil
+        bindAttachmentBehavior()
+    }
+
+    func bindAttachmentBehavior() {
+        attachmentBehavior.textView = self
+        layoutManager.delegate = self.attachmentBehavior
+        textStorage.delegate = self.attachmentBehavior
     }
 
 }
